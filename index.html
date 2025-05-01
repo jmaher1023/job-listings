@@ -79,5 +79,33 @@
           </form>
         </div>
       </div>
+      <script>
+  const modal = document.getElementById("jobModal");
+  const closeBtn = document.querySelector(".close");
+  const positionField = document.getElementById("position");
+  const locationField = document.getElementById("location");
+
+  // Handle card clicks
+  document.querySelectorAll(".card-link").forEach(card => {
+    card.addEventListener("click", e => {
+      e.preventDefault();
+      const link = new URL(card.href);
+      const position = link.searchParams.get("position");
+      const location = link.searchParams.get("location");
+
+      positionField.value = decodeURIComponent(position);
+      locationField.value = decodeURIComponent(location);
+
+      modal.style.display = "block";
+    });
+  });
+
+  // Close modal
+  closeBtn.onclick = () => modal.style.display = "none";
+  window.onclick = e => {
+    if (e.target == modal) modal.style.display = "none";
+  };
+</script>
+
     </body>
   </html>
