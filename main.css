@@ -73,6 +73,13 @@ p {
   position: relative;
 }
 
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
 .close {
   position: absolute;
   right: 20px;
@@ -87,8 +94,8 @@ form label {
 }
 
 form input, form button {
-  width: 90%;
-  padding: 10px;
+  width: 100%;
+  padding: 10px 15px;
   margin: 5px auto 0px;
   font-size: 1em;
 }
