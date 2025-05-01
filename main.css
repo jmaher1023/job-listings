@@ -96,12 +96,14 @@ form label {
 form input, form button {
   width: 100%;
   padding: 10px 15px;
-  margin: 5px auto 0px;
-  font-size: 1em;
+  margin: 10px auto;
+  font-size: 1rem;
 }
 
 form input {
   border-radius: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
 form button {
