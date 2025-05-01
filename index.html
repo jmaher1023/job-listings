@@ -1,111 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Job Listings</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div id="jobContainer"></div>
 
-  <html>
-    <head>
-      <link rel="stylesheet" href="https://jmaher1023.github.io/job-listings/main.css">
-      <style>
-        .card-link {
-          text-decoration: none;
-          color: inherit;
-        }
-        .card-link:hover .card {
-          box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-          transform: scale(1.02);
-          transition: all 0.2s ease;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="grid">
-        
-    <a href="https://theemployerschoice.net/#contact?position=Insurance%20Agent&location=Maumelle%2C%20AR" class="card-link" target="_top">
-      <div class="card">
-        <h3>Insurance Agent</h3>
-        <p><strong>Company:</strong> Everett & Associates</p>
-        <p><strong>Location:</strong> Maumelle, AR</p>
-        <p><strong>Work Environment:</strong> Office/On the Road</p>
-      </div>
-    </a>
-  
+  <!-- Modal Form -->
+  <div id="jobModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Contact Us About This Position</h2>
+      <form id="jobForm" action="https://hook.n8n.cloud/YOUR_WEBHOOK_PATH" method="POST">
+        <label for="position">Position</label>
+        <input type="text" name="position" id="position" readonly />
 
-    <a href="https://theemployerschoice.net/#contact?position=Insurance%20Agent&location=Searcy%2C%20AR" class="card-link" target="_top">
-      <div class="card">
-        <h3>Insurance Agent</h3>
-        <p><strong>Company:</strong> Everett & Associates</p>
-        <p><strong>Location:</strong> Searcy, AR</p>
-        <p><strong>Work Environment:</strong> Office/On the Road</p>
-      </div>
-    </a>
-  
+        <label for="location">Location</label>
+        <input type="text" name="location" id="location" readonly />
 
-    <a href="https://theemployerschoice.net/#contact?position=Insurance%20Agent&location=Jonesboro%2C%20AR" class="card-link" target="_top">
-      <div class="card">
-        <h3>Insurance Agent</h3>
-        <p><strong>Company:</strong> Everett & Associates</p>
-        <p><strong>Location:</strong> Jonesboro, AR</p>
-        <p><strong>Work Environment:</strong> Office/On the Road</p>
-      </div>
-    </a>
-  
+        <label for="name">Your Name</label>
+        <input type="text" name="name" required />
 
-    <a href="https://theemployerschoice.net/#contact?position=Insurance%20Agent&location=Maumelle%2C%20AR" class="card-link" target="_top">
-      <div class="card">
-        <h3>Insurance Agent</h3>
-        <p><strong>Company:</strong> Everett & Associates</p>
-        <p><strong>Location:</strong> Maumelle, AR</p>
-        <p><strong>Work Environment:</strong> Remote</p>
-      </div>
-    </a>
-  
-      </div>
-      <!-- Modal -->
-      <div id="jobModal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2>Contact Us About This Position</h2>
-          <form id="jobForm" action="https://formspree.io/f/YOUR_ID" method="POST">
-            <label for="position">Position</label>
-            <input type="text" name="position" id="position" readonly />
-      
-            <label for="location">Location</label>
-            <input type="text" name="location" id="location" readonly />
-      
-            <label for="name">Your Name</label>
-            <input type="text" name="name" required />
-      
-            <label for="email">Your Email</label>
-            <input type="email" name="email" required />
-      
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-      </div>
-      <script>
-  const modal = document.getElementById("jobModal");
-  const closeBtn = document.querySelector(".close");
-  const positionField = document.getElementById("position");
-  const locationField = document.getElementById("location");
+        <label for="email">Your Email</label>
+        <input type="email" name="email" required />
 
-  // Handle card clicks
-  document.querySelectorAll(".card-link").forEach(card => {
-    card.addEventListener("click", e => {
-      e.preventDefault();
-      const link = new URL(card.href);
-      const position = link.searchParams.get("position");
-      const location = link.searchParams.get("location");
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
 
-      positionField.value = decodeURIComponent(position);
-      locationField.value = decodeURIComponent(location);
+  <script>
+    fetch("jobs.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("jobContainer").innerHTML = html;
 
-      modal.style.display = "block";
-    });
-  });
+        // Modal logic
+        const modal = document.getElementById("jobModal");
+        const closeBtn = document.querySelector(".close");
+        const positionField = document.getElementById("position");
+        const locationField = document.getElementById("location");
 
-  // Close modal
-  closeBtn.onclick = () => modal.style.display = "none";
-  window.onclick = e => {
-    if (e.target == modal) modal.style.display = "none";
-  };
-</script>
+        document.querySelectorAll(".card-link").forEach(card => {
+          card.addEventListener("click", e => {
+            e.preventDefault();
+            const link = new URL(card.href);
+            const position = link.searchParams.get("position");
+            const location = link.searchParams.get("location");
 
-    </body>
-  </html>
+            positionField.value = decodeURIComponent(position);
+            locationField.value = decodeURIComponent(location);
+
+            modal.style.display = "block";
+          });
+        });
+
+        closeBtn.onclick = () => modal.style.display = "none";
+        window.onclick = e => {
+          if (e.target == modal) modal.style.display = "none";
+        };
+      });
+  </script>
+</body>
+</html>
