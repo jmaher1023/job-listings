@@ -57,5 +57,27 @@
     </a>
   
       </div>
+      <!-- Modal -->
+      <div id="jobModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Contact Us About This Position</h2>
+          <form id="jobForm" action="https://formspree.io/f/YOUR_ID" method="POST">
+            <label for="position">Position</label>
+            <input type="text" name="position" id="position" readonly />
+      
+            <label for="location">Location</label>
+            <input type="text" name="location" id="location" readonly />
+      
+            <label for="name">Your Name</label>
+            <input type="text" name="name" required />
+      
+            <label for="email">Your Email</label>
+            <input type="email" name="email" required />
+      
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
     </body>
   </html>
