@@ -93,3 +93,23 @@ form input, form button {
   font-size: 1em;
 }
 
+form button {
+  background-color: #b91c4c; /* adjust to match exact shade */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  padding: 15px 40px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: background 0.2s ease;
+}
+
+form button:hover {
+  background-color: #9b173f; /* darker on hover */
+}
+
+
