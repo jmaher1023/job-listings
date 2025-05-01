@@ -2,6 +2,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: transparent;
   padding: 40px;
+  margin: 0;
 }
 
 .grid {
@@ -15,6 +16,14 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   padding: 20px;
+  transition: all 0.2s ease;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.card:hover {
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  transform: scale(1.02);
 }
 
 h3 {
@@ -25,6 +34,13 @@ h3 {
 p {
   margin: 8px 0;
   font-size: 0.95em;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
 }
 
 @media (max-width: 900px) {
