@@ -93,6 +93,10 @@ form input, form button {
   font-size: 1em;
 }
 
+form input {
+  border-radius: 10px;
+}
+
 form button {
   background-color: #b91c4c; /* adjust to match exact shade */
   color: white;
