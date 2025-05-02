@@ -13,7 +13,7 @@
     <div class="modal-content">
       <span class="close">&times;</span>
       <h2>Contact Us About This Position</h2>
-      <form id="jobForm" action="https://n8n.srv738335.hstgr.cloud/webhook/ec7b2ccf-6007-4769-9f44-5b45bc387004" method="POST">
+      <form id="jobForm">
 
         <label for="name">Your Name</label>
         <input type="text" name="name" required />
@@ -67,5 +67,42 @@
         };
       });
   </script>
+  <script>
+  const form = document.getElementById("jobForm");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const data = new FormData(form);
+    const json = {};
+    data.forEach((value, key) => {
+      json[key] = value;
+    });
+
+    try {
+      await fetch("https://n8n.srv738335.hstgr.cloud/webhook/ec7b2ccf-6007-4769-9f44-5b45bc387004", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(json),
+      });
+
+      // Close modal
+      document.getElementById("jobModal").style.display = "none";
+
+      // Optional: Refresh jobs
+      fetch("jobs.html")
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById("jobContainer").innerHTML = html;
+        });
+
+      alert("Thanks! Your info was submitted.");
+    } catch (err) {
+      alert("Oops! Something went wrong.");
+      console.error(err);
+    }
+  });
+</script>
+
 </body>
 </html>
